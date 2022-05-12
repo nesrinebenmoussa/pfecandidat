@@ -21,7 +21,12 @@ const getAll = async() => {
     const response = await axios.get(API_URL+'all');
     return response.data;
 };
-
+const getAnnonceByid = async(id) => {
+    console.log(id,"hedha lid")
+    const response = await axios.get('http://localhost:5000/api/annonces/'+id);
+    console.log(response.data,'response')
+    return response.data;
+};
 // Delete
 const deleteById = async(Id, token) => {
     const config = {
@@ -38,6 +43,7 @@ const annonceService = {
     create,
     getAll,
     deleteById,
+    getAnnonceByid
 };
 
 export default  annonceService;

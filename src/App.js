@@ -4,6 +4,9 @@ import  Login from "./pages/Login"
 import  Register from "./pages/Register"
 import  Profile  from "./pages/Profile"
 import  Jobs from "./pages/Jobs"
+import  EditP from "./pages/EditP"
+
+import  Postulation from "./pages/Postulation"
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css"
@@ -27,8 +30,10 @@ function App() {
           <Route path='/login' element={<Login />} />{" "}
            
           <Route path='/' element={<Home />} />
+          <Route path='/edit/:id' element={<EditP />} />
           <Route path='/Jobs' element={<Jobs />} />
           <Route path='/Profile' element={<Profile />} />
+          <Route path='/Postulation/:id' element={<Postulation />} />
           <Route path='/register' element={<Register />} />
 
         

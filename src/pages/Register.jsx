@@ -10,10 +10,12 @@ function Register(){
     const [formData, setFormData] = useState({
         email: '',
         password: '',
-        name:''
+        name:'',
+        tel:'',
+        adress:''
       })
     
-      const { email, password,name } = formData
+      const { email, password,name ,tel,adress} = formData
     
       const navigate = useNavigate()
       const dispatch = useDispatch()
@@ -28,7 +30,7 @@ function Register(){
         }
     
         if (isSuccess || user) { 
-           //navigate('/Login')
+           navigate('/Login')
         }
     
         dispatch(reset())
@@ -47,7 +49,7 @@ function Register(){
         const userData = {
           email,
           password,
-          name
+          name,tel,adress
         }
     
         dispatch(register(userData)).unwrap().then(data=>{ console.log(data)}).catch(
@@ -81,6 +83,20 @@ function Register(){
                     <div className="form-outline flex-fill mb-0">
                       <input type="email"  className="form-control" onChange={onChange} name="email" />
                       <label className="form-label" htmlFor="form3Example3c">Your Email</label>
+                    </div>
+                  </div>
+                  <div className="d-flex flex-row align-items-center mb-4">
+                    <i className="fas fa-lock fa-lg me-3 fa-fw" />
+                    <div className="form-outline flex-fill mb-0">
+                      <input type="text"  className="form-control" onChange={onChange} name="adress"/>
+                      <label className="form-label" htmlFor="form3Example4c">Adresse</label>
+                    </div>
+                  </div>
+                  <div className="d-flex flex-row align-items-center mb-4">
+                    <i className="fas fa-lock fa-lg me-3 fa-fw" />
+                    <div className="form-outline flex-fill mb-0">
+                      <input type="number"  className="form-control" onChange={onChange} name="tel"/>
+                      <label className="form-label" htmlFor="form3Example4c">Telephone</label>
                     </div>
                   </div>
                   <div className="d-flex flex-row align-items-center mb-4">

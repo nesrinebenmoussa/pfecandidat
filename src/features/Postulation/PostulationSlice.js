@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import annonceService from './annonceService'
+import { toast } from 'react-toastify'
+import service from "./PostulationService"
+
 
 const initialState = {
-    annonces: [],
+    postulations: [],
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -11,66 +13,53 @@ const initialState = {
 
 // Create  
 export const create = createAsyncThunk(
-    'annonces/create',
+    'postulations/create',
     async(data, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
-            return await annonceService.create(data, token)
+            const res =  await service.create(data, token)
+            console.log(res , "respons in the serviced")
+           
         } catch (error) {
             const message =
                 (error.response &&
                     error.response.data &&
                     error.response.data.message) ||
                 error.message ||
-                error.toString()
+                error.toString();
+            return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+export const getByC = createAsyncThunk(
+    'postulations/getByC',
+    async(data, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await service.getByC(data, token)
+           
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
             return thunkAPI.rejectWithValue(message)
         }
     }
 )
 
-// Get all
-export const getAll = createAsyncThunk(
-    'annonces/getAll',
-    async(_, thunkAPI) => {
-        try {
-            const token = thunkAPI.getState().auth.user.token
-            return await annonceService.getAll(token)
-        } catch (error) {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString()
-            return thunkAPI.rejectWithValue(message)
-        }
-    }
-)
-export const getAnnonceByid = createAsyncThunk(
-    'annonces/getAnnonceByid',
-    async(id, thunkAPI) => {
-        try {
-            const token = thunkAPI.getState().auth.user.token
-            return await annonceService.getAnnonceByid(id)
-        } catch (error) {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString()
-            return thunkAPI.rejectWithValue(message)
-        }
-    }
-)
+
+
 
 // Delete  
 export const remmove = createAsyncThunk(
-    'annonces/delete',
+    'postulations/delete',
     async(id, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
-            return await annonceService.deleteById(id, token)
+            return await service.deleteById(id, token)
         } catch (error) {
             const message =
                 (error.response &&
@@ -83,8 +72,43 @@ export const remmove = createAsyncThunk(
     }
 )
 
-export const annonceSlice = createSlice({
-    name: 'annonces',
+
+export const getById = createAsyncThunk(
+    'postulations/getById',
+    async(id, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await service.getById(id, token)
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString()
+            return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
+export const update = createAsyncThunk(
+    'postulations/update',
+    async( data , thunkAPI) => {
+        try {
+             return await service.update( data)
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString()
+            return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+export const PostulationSlice = createSlice({
+    name: 'postulations',
     initialState,
     reducers: {
         reset: (state) => initialState,
@@ -97,35 +121,48 @@ export const annonceSlice = createSlice({
             .addCase(create.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.annonces.push(action.payload)
+                state.postulations.push(action.payload)
             })
             .addCase(create.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
             })
-            .addCase(getAll.pending, (state) => {
+            .addCase(getByC.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(getAll.fulfilled, (state, action) => {
+            .addCase(getByC.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.annonces = action.payload
+                state.postulations=action.payload
             })
-            .addCase(getAll.rejected, (state, action) => {
+            .addCase(getByC.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
             })
-            .addCase(getAnnonceByid.pending, (state) => {
+            .addCase(getById.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(getAnnonceByid.fulfilled, (state, action) => {
+            .addCase(getById.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.annonces = action.payload
+                state.postulations=action.payload
             })
-            .addCase(getAnnonceByid.rejected, (state, action) => {
+            .addCase(getById.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(update.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(update.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.postulations=action.payload
+            })
+            .addCase(update.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
@@ -136,17 +173,19 @@ export const annonceSlice = createSlice({
             .addCase(remmove.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.annonces = state.annonces.filter(
-                    (annonce) => annonce._id !== action.payload.id
+                state.postulations = state.postulations.filter(
+                    (p) => p._id !== action.payload.id
                 )
+               
             })
             .addCase(remmove.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
+                toast.error(state.message)
             })
     },
 })
 
-export const { reset } = annonceSlice.actions
-export default annonceSlice.reducer
+export const { reset } = PostulationSlice.actions
+export default PostulationSlice.reducer

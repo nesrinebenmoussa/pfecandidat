@@ -171,6 +171,7 @@ export const recruterSlice = createSlice({
                 state.recrruterIsLoading = false
                 state.recruterIsSuccess = true
                 state.recruters = action.payload
+                console.log(state.recruters)
             })
             .addCase(getRecruter.rejected, (state, action) => {
                 state.recrruterIsLoading = false

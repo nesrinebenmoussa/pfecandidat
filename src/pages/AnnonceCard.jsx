@@ -3,6 +3,8 @@ import { getRecruter } from '../features/recruter/recruterSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Link, Navigate } from "react-router-dom";
+
 function AnnonceCard({annonce}) {
 
     const navigate = useNavigate();
@@ -31,7 +33,9 @@ function AnnonceCard({annonce}) {
     
     ]);
 
-
+const postuler=()=>{
+  navigate(`/Postulation/${annonce._id}`)
+}
 
   return (
       <>
@@ -48,8 +52,11 @@ function AnnonceCard({annonce}) {
           <p className="text-muted mt-3 mb-0">{annonce.desc}</p>
           <p className="text-muted mt-3 mb-0">{annonce.salary}DT</p>
 
-          <div className="mt-3">
-            <a href="javascript:void(0)" className="text-custom">Postuler <i className="mdi mdi-chevron-right" /></a>
+          <div className="mt-3" onClick={postuler}>
+           
+            <span  className="text-custom " >Postuler <i className="mdi mdi-chevron-right" /></span>
+            
+            
           </div>
         </div>
         <div className="big-icon h1 text-custom">
