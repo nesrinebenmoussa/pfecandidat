@@ -10,7 +10,20 @@ const updateCondidat = async(Data, token) => {
         },
     };
 
-    const response = await axios.patch(API_URL+Data._id, Data, config);
+    const response = await axios.patch(API_URL + Data._id, Data, config);
+
+    return response.data;
+};
+
+
+const getCondidatById = async(id, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    const response = await axios.get(API_URL + id, config);
 
     return response.data;
 };
@@ -18,7 +31,8 @@ const updateCondidat = async(Data, token) => {
 
 const condidatService = {
     updateCondidat,
-    
+    getCondidatById
+
 };
 
 

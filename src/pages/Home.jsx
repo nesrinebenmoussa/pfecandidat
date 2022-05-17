@@ -17,10 +17,7 @@ function Home() {
     useSelector((state) => state.annonces);
 
   useEffect(() => {
-    if (isError) {
-      console.log(message);
-    }
-
+     
     if (!user) {
       navigate("/login");
     }
@@ -36,7 +33,6 @@ function Home() {
     dispatch,
   
   ]);
-  if(annonces.length>0)
   return (
 
     <>
@@ -45,16 +41,19 @@ function Home() {
   <div className="row justify-content-center">
     <div className="col-12">
       <div className="section-title text-center mb-4 pb-2">
-        <h4 className="title mb-4">Our Features</h4>
-        <p className="text-muted para-desc mx-auto mb-0">There is now an abundance of readable dummy texts. These are usually used when a text is required purely to fill a space.</p>
+        <h4 className="title mb-4">Our Annonces</h4>
+        <p className="text-muted para-desc mx-auto mb-0">  Join us and see what's next </p>
       </div>
     </div>{/*end col*/}
   </div>{/*end row*/}
   <div className="row">
-  {annonces.map((an) => (
+    
+  {annonces.length>0 ? annonces.map((an) => (
               
     <AnnonceCard key={an._id}  annonce={an}/> 
-   )) }
+   )):(
+     <h1>no annonces yet</h1>
+   ) }
     </div>{/*end col*/}
   </div> 
 

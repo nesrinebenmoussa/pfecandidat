@@ -29,13 +29,10 @@ function NavBar() {
     
   }, [user, isError, isSuccess, message, navigate, dispatch])
   
-  const logouta=()=>{
-    dispatch(logout()
-      )
-  }
+ 
   return (
   <nav className="navbar navbar-expand-lg navbar-primary bg-primary" >
-  <a className="navbar-brand" href="#">Navbar</a>
+  <a className="navbar-brand" >Navbar</a>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon" />
   </button>
@@ -84,7 +81,7 @@ function NavBar() {
   </div>
   <ul className="navbar-nav">
   <li className="nav-item  my-2 my-sm-0">
-      
+        <Link to='/login'>
               <span
                 data-bs-toggle="tooltip"
                 data-bs-placement="right"
@@ -92,8 +89,10 @@ function NavBar() {
               >
                
               </span>
-               <span className="nav-link text-white " onClick={logouta}> <AiOutlineLogout/>  Logout</span>
-            
+               <span className="nav-link text-white " onClick={()=>{
+    dispatch(logout())
+  }}> <AiOutlineLogout/>  Logout</span>
+           </Link> 
       </li>
   </ul>
 </nav>

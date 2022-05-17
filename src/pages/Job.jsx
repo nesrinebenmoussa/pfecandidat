@@ -16,7 +16,8 @@ function Job({postulation}) {
   useEffect(() => {
 
 
-    dispatch(getAnnonceByid(postulation.annonce));
+    dispatch(getAnnonceByid(postulation.annonce)).unwrap().
+    then(data => console.log(data , 'hedhy annoce'));
   }, [ navigate, dispatch]);
  const edit=()=>{
      navigate(`/edit/${postulation._id}`)

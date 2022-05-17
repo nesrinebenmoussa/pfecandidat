@@ -6,7 +6,7 @@ import  Profile  from "./pages/Profile"
 import  Jobs from "./pages/Jobs"
 import  EditP from "./pages/EditP"
 
-import  Postulation from "./pages/Postulation"
+import Postulation from "./pages/postulation"
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css"
