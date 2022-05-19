@@ -15,9 +15,6 @@ function EditP() {
     useSelector((state) => state.postulations);
    
   useEffect(() => {
-  
- 
-
     dispatch(getById(id)).unwrap().then(
       (res)=>{
      console.log(res)
@@ -121,7 +118,7 @@ function EditP() {
                     <div className="form-group">
                       <label htmlFor="eMail">date de naissance</label>
                       <input
-                        type="date"
+                        type="text"
                         className="form-control"
                         placeholder="Enter date"
                         onChange={onChange}
@@ -213,7 +210,7 @@ function EditP() {
                     <div className="form-group">
                       <label htmlFor="ciTy">Date obtention</label>
                       <input
-                        type="date"
+                        type="text"
                         className="form-control"
                         onChange={onChange}
                         name="datedep"

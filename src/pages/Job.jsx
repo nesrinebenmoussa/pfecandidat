@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import{getAnnonceByid} from "../features/annonce/annonceSlice"
-import {FaPen} from 'react-icons/fa'
+import {FaAd, FaPen} from 'react-icons/fa'
 import {FaTrash} from 'react-icons/fa'
 import { toast } from "react-toastify";
 import {remmove} from '../features/Postulation/PostulationSlice'
@@ -30,13 +30,16 @@ function Job({postulation}) {
   return(
       <>
         <tr >
-                  <td className="text-truncate">{annonces.specialite}</td>
+                  <td className="text-truncate">{postulation.diplome}</td>
                   <td className="text-truncate">
                 {postulation.reponse}
                   </td>
                   <td className="text-truncate">
                    <tr> <td onClick={edit}><FaPen   />  </td>    
                     <td onClick={deletea}><FaTrash/></td>
+                    <td onClick={()=>{
+                      navigate('/questionaire/'+postulation._id)
+                    }}> <FaAd /></td>
                     </tr>
                   </td>
                 </tr></>

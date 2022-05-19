@@ -4,6 +4,7 @@ import annonceReducer from "../features/annonce/annonceSlice";
 import recruterReducer from "../features/recruter/recruterSlice";
 import PostulationReducer from "../features/Postulation/PostulationSlice";
 import condidatReducer from "../features/condidat/condidatSlice";
+import qesReducer from "../features/Postulation/qesSlice";
 export const store = configureStore({
     reducer: {
         auth: authReducer,
@@ -11,5 +12,6 @@ export const store = configureStore({
         recruters: recruterReducer,
         postulations: PostulationReducer,
         condidats: condidatReducer,
+        qes: qesReducer,
     },
 });

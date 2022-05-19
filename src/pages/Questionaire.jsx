@@ -6,41 +6,42 @@ import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { create, reset } from "../features/Postulation/PostulationSlice";
+import { create, reset } from "../features/Postulation/qesSlice";
 import { toast } from "react-toastify";
 
-function Postulation() {
+function Questionaire() {
+
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    diplome: "",
-    datedep: "",
-    exp: "",
-    moyfe: "",
-    tel: "",
-    tel2: "",
-    cin: "",
-    name: "",
-    lastname: "",
-    datenaissance: "",
-    email: "",
-    email2: "",
+    q1: "",
+    q2: "",
+    q3: "",
+    q4: "",
+    q5: "",
+    q6: "",
+    q7: "",
+    q8: "",
+    q9: "",
+    q10: "",
+    q11: "",
+    q12: "",
   });
 
   const {
-    diplome,
-    datedep,
-    exp,
-    moyfe,
-    tel,
-    cin,
-    name,
-    lastname,
-    datenaissance,
-    email,
-    tel2,
-    email2,
+    q1 ,
+    q2 ,
+    q3 ,
+    q4 ,
+    q5 ,
+    q6 ,
+    q7 ,
+    q8 ,
+    q9 ,
+    q10 ,
+    q11 ,
+    q12 ,
   } = formData;
 
   const { user } = useSelector((state) => state.auth);
@@ -50,8 +51,6 @@ function Postulation() {
   );
 
   useEffect(() => {
-  
-
     return () => {
       dispatch(reset());
     };
@@ -66,233 +65,176 @@ function Postulation() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (email != email2 || tel != tel2) {
-      toast.error("confirm email or tel");
-    }
-    const annonce = id;
-    const condidat = user._id;
-    console.log("ehy condidat", user._id);
-    const postData = {
-      diplome,
-      datedep,
-      exp,
-      moyfe,
-      tel,
-      cin,
-      name,
-      lastname,
-      datenaissance,
-      email,
-      annonce,
-      condidat,
-    };
-    console.log("3lech le", postData);
 
-    dispatch(create(postData)).unwrap().then(data  => navigate("/jobs")
-    ).catch(err => toast.error(err))
+    formData.postulation = id;
+    console.log("responses ", formData);
 
-     
-    
+    dispatch(create(formData))
+      .unwrap()
+      .then((data) => navigate("/"))
+      .catch((err) => toast.error(err));
   };
   /////
 
-  const { annonces } = useSelector((state) => state.annonces);
-  const { recruters } = useSelector((state) => state.recruters);
-
-  useEffect(() => {
-    if (isError) {
-      console.log(message);
-    }
-
-    dispatch(getAnnonceByid(id))
-      .unwrap()
-      .then((res) => {
-        console.log(res, "gmara");
-        dispatch(getRecruter(res.recruter));
-      });
-  }, [navigate]);
+ 
 
   return (
     <>
       <NavBar />
       <div className='container mt-4'>
         <div className='row gutters'>
-          <div className='col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12'>
-            <div className='card h-100'>
-              <div className='card-body'>
-                <div className='account-settings'>
-                  <div className='user-profile'>
-                    <div className='user-avatar'>
-                      <img
-                        src='https://bootdey.com/img/Content/avatar/avatar7.png'
-                        alt='Maxwell Admin'
-                      />
-                    </div>
-                    <h5 className='user-name'>{recruters.name}</h5>
-                  </div>
-                  <div className='about'>
-                    <h5>{annonces.specialite}</h5>
-                    <p>{annonces.desc}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12'>
+          
+          <div className=' '>
             <div className='card h-100'>
               <div className='card-body'>
                 <div className='row gutters'>
                   <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12'>
-                    <h6 className='mb-2 text-primary'>Personal Details</h6>
+                    <h6 className='mb-2 text-primary'>Questionaire</h6>
                   </div>
                   <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
                     <div className='form-group'>
-                      <label htmlFor='fullName'>Num Cin</label>
+                      <label htmlFor='fullName'>Présentez vous…. </label>
                       <input
                         type='text'
                         className='form-control'
-                        placeholder='Enter num cin'
+                        placeholder='Présentez vous….'
                         onChange={onChange}
-                        name='cin'
+                        name='q1'
                       />
                     </div>
                   </div>
                   <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
                     <div className='form-group'>
-                      <label htmlFor='eMail'>date de naissance</label>
+                      <label htmlFor='eMail'>Quel est votre job de rêve ?</label>
                       <input
-                        type='date'
+                        type='text'
                         className='form-control'
-                        placeholder='Enter date'
+                        placeholder='Quel est votre job de rêve ?'
                         onChange={onChange}
-                        name='datenaissance'
+                        name='q2'
                       />
                     </div>
                   </div>
                   <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
                     <div className='form-group'>
-                      <label htmlFor='phone'>Name</label>
+                      <label htmlFor='phone'> Quelles sont vos qualités et quels sont vos points faibles ?</label>
                       <input
                         type='text'
                         className='form-control'
                         onChange={onChange}
-                        name='name'
-                        placeholder='Enter name'
+                        name='q3'
+                        placeholder='Quelles sont vos qualités et quels sont vos points faibles ?'
                       />
                     </div>
                   </div>
                   <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
                     <div className='form-group'>
-                      <label htmlFor='website'>LastName</label>
+                      <label htmlFor='website'> Que savez-vous de notre entreprise ?</label>
                       <input
-                        type='url'
+                        type='text'
                         className='form-control'
                         onChange={onChange}
-                        name='lastname'
-                        placeholder='ENter Last Name'
+                        name='q4'
+                        placeholder='Que savez-vous de notre entreprise ?'
                       />
                     </div>
                   </div>
                   <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
                     <div className='form-group'>
-                      <label htmlFor='website'>tel1</label>
+                      <label htmlFor='website'> En quoi le poste à pourvoir vous intéresse-t-il ?  </label>
                       <input
                         type='url'
                         className='form-control'
                         onChange={onChange}
-                        name='tel'
-                        placeholder='Enter tel number'
+                        name='q5'
+                        placeholder='En quoi le poste à pourvoir vous intéresse-t-il ?'
                       />
                     </div>
                   </div>
                   <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
                     <div className='form-group'>
-                      <label htmlFor='website'>tel2</label>
+                      <label htmlFor='website'> Comment envisagez-vous votre carrière </label>
                       <input
-                        type='url'
+                        type='text'
                         className='form-control'
                         onChange={onChange}
-                        name='tel2'
-                        placeholder='confirm tel number'
+                        name='q6'
+                        placeholder='Comment envisagez-vous votre carrière '
                       />
                     </div>
                   </div>
                   <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
                     <div className='form-group'>
-                      <label htmlFor='website'>Email1</label>
+                      <label htmlFor='website'>Quelles sont vos compétences dans le domaine des langues ?</label>
                       <input
-                        type='url'
+                        type='text'
                         className='form-control'
                         onChange={onChange}
-                        name='email'
-                        placeholder='Enter email adresse'
+                        name='q7'
+                        placeholder='Quelles sont vos compétences dans le domaine des langues ?'
                       />
                     </div>
                   </div>
                   <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
                     <div className='form-group'>
-                      <label htmlFor='website'>Email2</label>
+                      <label htmlFor='website'> Décrivez moi vos expériences professionnelles ?</label>
                       <input
                         type='url'
                         className='form-control'
                         onChange={onChange}
-                        name='email2'
-                        placeholder='confirm  email adresse'
+                        name='q8'
+                        placeholder='Décrivez moi vos expériences professionnelles ?'
                       />
                     </div>
                   </div>
                 </div>
                 <div className='row gutters'>
-                  <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12'>
-                    <h6 className='mt-3 mb-2 text-primary'>
-                      Experience Professionelle
-                    </h6>
-                  </div>
+                
                   <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
                     <div className='form-group'>
-                      <label htmlFor='Street'>Diplome</label>
+                      <label htmlFor='Street'>Aimez-vous le travail en équipe ? Pour quelles raisons ?</label>
                       <input
                         type='text'
                         className='form-control'
                         onChange={onChange}
-                        name='diplome'
-                        placeholder='Enter diplome'
+                        name='q9'
+                        placeholder='Aimez-vous le travail en équipe ? Pour quelles raisons ?'
                       />
                     </div>
                   </div>
                   <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
                     <div className='form-group'>
-                      <label htmlFor='ciTy'>Date obtention</label>
+                      <label htmlFor='ciTy'>  Vous vous voyez où dans cinq ans ? </label>
                       <input
-                        type='date'
+                        type='text'
                         className='form-control'
                         onChange={onChange}
-                        name='datedep'
-                        placeholder='Enter Date'
+                        name='q10'
+                        placeholder='Vous vous voyez où dans cinq ans ?'
                       />
                     </div>
                   </div>
                   <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
                     <div className='form-group'>
-                      <label htmlFor='sTate'>experience</label>
+                      <label htmlFor='sTate'>Pourquoi devrais-je vous choisir plutôt que quelqu’un d’autre </label>
                       <input
-                        type='number'
+                        type='text'
                         className='form-control'
                         onChange={onChange}
-                        name='exp'
-                        placeholder='Enter experience month number'
+                        name='q11'
+                        placeholder='Pourquoi devrais-je vous choisir plutôt que quelqu’un d’autre '
                       />
                     </div>
                   </div>
                   <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12'>
                     <div className='form-group'>
-                      <label htmlFor='zIp'>moyenne fin d'etude</label>
+                      <label htmlFor='zIp'>Avez-vous des questions ?</label>
                       <input
-                        type='number'
+                        type='text'
                         className='form-control'
                         onChange={onChange}
-                        name='moyfe'
-                        placeholder='Enter moyenne'
+                        name='q12'
+                        placeholder='Avez-vous des questions ?'
                       />
                     </div>
                   </div>
@@ -306,7 +248,7 @@ function Postulation() {
                         name='submit'
                         onClick={onSubmit}
                         className='btn btn-primary'>
-                        postuler
+                        envoyer 
                       </button>
                     </div>
                   </div>
@@ -320,4 +262,4 @@ function Postulation() {
   );
 }
 
-export default Postulation;
+export default Questionaire;
