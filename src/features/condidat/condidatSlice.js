@@ -46,6 +46,24 @@ export const getCondidatById = createAsyncThunk(
         }
     }
 );
+
+export const createCv = createAsyncThunk(
+    "condidats/getbyid",
+    async(Data, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token;
+            return await condidatService.createCv(Data, token);
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
 export const condidatSlice = createSlice({
     name: "condidats",
     initialState,
@@ -79,7 +97,8 @@ export const condidatSlice = createSlice({
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload;
-            });
+            })
+
     },
 });
 

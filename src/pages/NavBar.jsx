@@ -4,7 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import{AiOutlineLogout} from "react-icons/ai"
 import{FaHome}from "react-icons/fa"
 import{MdHomeRepairService}from "react-icons/md"
-import{FaUser} from "react-icons/fa"
+import{FaUser , FaArchive} from "react-icons/fa"
 import { useNavigate } from 'react-router-dom' 
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -80,6 +80,18 @@ function NavBar() {
     </ul>
   </div>
   <ul className="navbar-nav">
+  <li className="nav-item  my-2 my-sm-0">
+        <Link to='/CV'>
+              <span
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                title="CV"
+              >
+               
+              </span>
+               <span className="nav-link text-white " > <FaArchive/>  CV </span>
+           </Link> 
+      </li>
   <li className="nav-item  my-2 my-sm-0">
         <Link to='/login'>
               <span

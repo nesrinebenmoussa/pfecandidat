@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css"
 import React from "react";
 import Home from "./pages/Home";
 import Questionaire from "./pages/Questionaire";
+import CV from "./pages/CV";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path='/Postulation/:id' element={<Postulation />} />
           <Route path='/register' element={<Register />} />
           <Route path="/questionaire/:id" element={<Questionaire />} />
+          <Route path="/CV" element={<CV />} />
         
         </Routes>{" "}
       </Router>{" "}
