@@ -36,6 +36,18 @@ export const get = createAsyncThunk("cv/get", async(Data, thunkAPI) => {
         return thunkAPI.rejectWithValue(message);
     }
 });
+export const deleteCV = createAsyncThunk("cv/delete", async(id, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token;
+        return await CVservice.deleteCV(id, token);
+    } catch (error) {
+        const message =
+            (error.response && error.response.data && error.response.data.message) ||
+            error.message ||
+            error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+});
 
 export const create = createAsyncThunk("cv/create", async(Data, thunkAPI) => {
     try {
@@ -63,9 +75,22 @@ export const CVslice = createSlice({
             .addCase(update.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-                state.condidats = action.payload;
+                state.cv = action.payload;
             })
             .addCase(update.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload;
+            })
+            .addCase(deleteCV.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteCV.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.cv = initialState;
+            })
+            .addCase(deleteCV.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload;
@@ -76,7 +101,7 @@ export const CVslice = createSlice({
             .addCase(get.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-                state.condidats = action.payload;
+                state.cv = action.payload;
             })
             .addCase(get.rejected, (state, action) => {
                 state.isLoading = false;
@@ -89,7 +114,7 @@ export const CVslice = createSlice({
             .addCase(create.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-                state.condidats = action.payload;
+                state.cv = action.payload;
             })
             .addCase(create.rejected, (state, action) => {
                 state.isLoading = false;

@@ -23,10 +23,12 @@ function Job({postulation}) {
      navigate(`/edit/${postulation._id}`)
  }
  const deletea=()=>{
+  var answer = window.confirm("Delete data?");
+  if (answer) {
     dispatch(remmove(postulation._id)).unwrap().
     then(data =>toast.success("dleeteed "))
     .catch(err=>toast.error(err))
-}
+}}
   return(
       <>
         <tr >

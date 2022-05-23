@@ -10,11 +10,21 @@ const update = async(Data, token) => {
         },
     };
 
-    const response = await axios.patch(API_URL + Data._id, Data, config);
+    const response = await axios.put(API_URL + Data._id, Data, config);
 
     return response.data;
 };
+const deleteCV = async(id, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
 
+    const response = await axios.delete(API_URL + id, config);
+
+    return response.data;
+};
 const get = async(id, token) => {
     const config = {
         headers: {
@@ -43,6 +53,7 @@ const condidatService = {
     update,
     get,
     create,
+    deleteCV
 };
 
 export default condidatService;

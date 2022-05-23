@@ -177,7 +177,9 @@ function Postulation() {
                         className='form-control'
                         onChange={onChange}
                         name='name'
+                        value={user.name}
                         placeholder='Enter name'
+                        disabled='true '
                       />
                     </div>
                   </div>
@@ -188,8 +190,8 @@ function Postulation() {
                         type='url'
                         className='form-control'
                         onChange={onChange}
-                        name='lastname'
-                        placeholder='ENter Last Name'
+                        name='lastname'                        value={user.name}
+
                       />
                     </div>
                   </div>
@@ -201,7 +203,8 @@ function Postulation() {
                         className='form-control'
                         onChange={onChange}
                         name='tel'
-                        placeholder='Enter tel number'
+                        value={user.tel}
+                        disabled='true '
                       />
                     </div>
                   </div>
@@ -214,6 +217,8 @@ function Postulation() {
                         onChange={onChange}
                         name='tel2'
                         placeholder='confirm tel number'
+                        value={user.tel}
+                        disabled='true '
                       />
                     </div>
                   </div>
@@ -225,7 +230,8 @@ function Postulation() {
                         className='form-control'
                         onChange={onChange}
                         name='email'
-                        placeholder='Enter email adresse'
+                        value={user.email}
+                  disabled='true '
                       />
                     </div>
                   </div>
@@ -237,8 +243,9 @@ function Postulation() {
                         className='form-control'
                         onChange={onChange}
                         name='email2'
-                        placeholder='confirm  email adresse'
-                      />
+                        disabled='true '
+                        value={user.email}
+                        />
                     </div>
                   </div>
                 </div>
