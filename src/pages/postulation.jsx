@@ -66,12 +66,19 @@ function Postulation() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (email != email2 || tel != tel2) {
-      toast.error("confirm email or tel");
-    }
+    if (email != email2 || tel != tel2 || !exp || !moyfe ||!cin || !datenaissance || !datedep )  {
+      toast.error("please fill all fields  ");
+    } else {
     const annonce = id;
-    const condidat = user._id;
-    console.log("ehy condidat", user._id);
+    const condidat = user._id;  
+    let dt = new Date();
+    let dn = new Date(datenaissance);
+    let dep  =  new Date(datedep) 
+    console.log(dt , 'hedhom datete',dn)
+    let dateconfirm =  (dn<dt);
+    let dateCon = (dep<dt);
+    console.log(dateconfirm , 'hedhy conpa date')
+    if(dateconfirm && dateCon){
     const postData = {
       diplome,
       datedep,
@@ -86,13 +93,15 @@ function Postulation() {
       annonce,
       condidat,
     };
-    console.log("3lech le", postData);
+   
 
     dispatch(create(postData)).unwrap().then(data  => navigate("/jobs")
     ).catch(err => toast.error(err))
 
-     
-    
+  }else {
+    toast.error('please verify date  ')
+  }
+}
   };
   /////
 

@@ -207,7 +207,10 @@ function CV() {
               </div>
             </div>
             <button class='btn btn-primary mr-3' type='button' onClick={()=>{
-            formData.condidat = user._id
+              if(!niveau || !formation || !langues || !diplome || !experience){
+                toast.error('please fill all fields')
+              }else{
+                    formData.condidat = user._id
             console.log(formData , 'hedha fesh nabeeth ')
             if(cv){
               formData._id = cv._id;
@@ -220,6 +223,8 @@ function CV() {
               toast.success('cv created ')
               navigate('/')
             })
+              }
+        
        
             }
                  }}>
